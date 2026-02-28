@@ -1,4 +1,4 @@
-# HỆ THỐNG THI TRẮC NGHIỆM ONLINE
+# HỆ THỐNG THI TRẮC NGHIỆM ONLINE PTIT
 
 Hệ thống thi trắc nghiệm dành cho sinh viên và quản trị viên, được xây dựng bằng:
 
