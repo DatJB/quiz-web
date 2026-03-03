@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng nhập - Hệ thống thi trắc nghiệm</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../../data/users.js"></script>
 </head>
 
 <body class="min-h-screen flex">
@@ -100,36 +101,35 @@
       return;
     }
 
+    initUsers();
+
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     // Tìm user trùng username + password
     const user = users.find(u => 
-        u.username === usernameInput && u.password === passwordInput
+        u.username === username && u.password === password
     );
 
     if (user) {
         // Lưu user đang đăng nhập
         localStorage.setItem("currentUser", JSON.stringify(user));
 
+        console.log(user);
+
         alert("Đăng nhập thành công!");
 
         // Phân quyền
         if (user.role === "admin") {
-            window.location.href = "admin-dashboard.html";
+            window.location.href = "../admin/dashboard.html";
         } else {
-            window.location.href = "student-dashboard.html";
+            window.location.href = "../student/home.html";
         }
 
     } else {
         alert("Sai tên đăng nhập hoặc mật khẩu!");
     }
 
-    localStorage.setItem("currentUser", JSON.stringify(user));
-
-    alert("Đăng nhập thành công!");
-
-    // Chuyển trang
-    window.location.href = "home.html";
+   
   });
 </script>
 
