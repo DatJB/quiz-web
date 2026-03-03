@@ -1,4 +1,4 @@
-const defaultExam = [
+const defaultExams = [
   {
     id: "1",
     title: "Luyện tập - Lập trình Web",
