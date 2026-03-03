@@ -1,4 +1,4 @@
-const defaultExams = [
+const defaultExam = [
   {
     id: "1",
     title: "Luyện tập - Lập trình Web",
@@ -432,6 +432,6 @@ const defaultExams = [
 
 function initExams() {
     if (!localStorage.getItem("exams")) {
-        localStorage.setItem("exams", JSON.stringify(defaultExams));
+        localStorage.setItem("exams", JSON.stringify(defaultExam));
     }
 }

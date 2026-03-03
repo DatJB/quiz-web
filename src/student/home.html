@@ -46,10 +46,15 @@
                 <!-- Dropdown Content -->
                 <div id="dropdownMenu"
                     class="hidden absolute right-0 mt-2 bg-white rounded-lg shadow-lg border z-50 mr-4">
+                    <!-- Label -->
+                    <div class="px-4 py-3 border-b">
+                        <p id="name" class="text-sm font-medium text-gray-900">Nguyễn Văn An</p>
+                        <p id="email" class="text-xs text-gray-500 mt-1 font-semibold">annv1@student.ptit.edu.vn</p>
+                    </div>
 
                     <!-- Menu Items -->
                     <button onclick="window.location.href = '../student/profile.html'"
-                    class="w-36 text-left px-4 py-2 text-md font-semibold text-red-600 hover:bg-gray-100 hover: rounded-lg items-center">
+                    class="w-40 text-left px-4 py-2 text-md font-semibold text-red-600 hover:bg-gray-100 hover: rounded-lg items-center">
                         <i class="fa-regular fa-user text-red-600 h-4 w-4 mr-2"></i> Hồ sơ
                     </button>
 
@@ -109,8 +114,12 @@
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         
         if (currentUser) {
-            if (currentUser.fullName) document.getElementById("fullname").textContent = currentUser.fullName;
+            if (currentUser.fullName) {
+                document.getElementById("fullname").textContent = currentUser.fullName;
+                document.getElementById("name").textContent = currentUser.fullName;
+            }
             if (currentUser.studentCode) document.getElementById("studentCode").textContent = currentUser.studentCode;
+            if (currentUser.email) document.getElementById("email").textContent = currentUser.email;
         }
 
         // Filter
