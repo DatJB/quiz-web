@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý kỳ thi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+
+    <header class="bg-red-600 text-white shadow-md fixed px-3 pr-7 top-0 left-0 right-0 z-50">
+        <div class="px-4 py-4 flex justify-between items-center">
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="text-white hover:bg-white/10 p-2 rounded-md transition">
+                    <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+                
+                <div>
+                    <h1 class="text-xl md:text-2xl font-semibold">Quản trị hệ thống</h1>
+                    <p class="text-xs md:text-sm opacity-90 mt-1 hidden sm:block">
+                        Hệ thống thi trắc nghiệm PTIT
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative">
+                <button onclick="toggleDropdown(event)" class="flex items-center gap-2 hover:bg-white/10 px-3 py-2 rounded-lg transition">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-red-600"></i>
+                    </div>
+                    <div class="text-left hidden md:block">
+                        <p class="text-sm font-medium">Quản trị viên</p>
+                        <p class="text-xs opacity-75">Admin</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down hidden md:block text-sm ml-1"></i>
+                </button>
+
+                <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg py-1 z-50 border border-gray-100">
+                    <div class="px-4 py-3 border-b border-gray-100 flex flex-col space-y-1">
+                        <p class="text-sm font-medium">Quản trị viên</p>
+                        <p class="text-xs text-gray-500">admin@ptit.edu.vn</p>
+                    </div>
+                    <button onclick="navigate('/admin/profile')" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center">
+                        <i class="fa-solid fa-gear w-4 h-4 mr-3 text-gray-500"></i> Hồ sơ
+                    </button>
+                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600 flex items-center">
+                        <i class="fa-solid fa-right-from-bracket w-4 h-4 mr-3"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-[72px]">
+        
+        <aside id="sidebar" class="fixed lg:sticky top-[72px] left-0 h-[calc(100vh-72px)] w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-x-hidden">
+            <nav class="h-full overflow-y-auto py-6 flex flex-col justify-between overflow-x-hidden">
+                <div class="space-y-1 px-3">
+                    <button onclick="navigate('/admin/dashboard')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/dashboard">
+                        <i class="fa-solid fa-table-columns w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Dashboard</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/exams')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/exams">
+                        <i class="fa-solid fa-file-lines w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý kỳ thi</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/manage-students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/manage-students">
+                        <i class="fa-solid fa-user-gear w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý sinh viên</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/students">
+                        <i class="fa-solid fa-users w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Kết quả sinh viên</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/statistics')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/statistics">
+                        <i class="fa-solid fa-chart-column w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Thống kê</span>
+                    </button>
+                </div>
+
+                <div>
+                    <div class="my-4 mx-3 border-t border-gray-200"></div>
+                    <div class="space-y-1 px-3">
+                        <button onclick="navigate('/admin/profile')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/profile">
+                            <i class="fa-solid fa-gear w-6 text-center text-lg"></i>
+                            <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Hồ sơ</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+        <main id="mainContent" class="flex-1 w-full transition-all duration-300">
+            <div class="p-6 space-y-6 max-w-5xl mx-auto">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h1 class="text-2xl font-semibold mb-1">Quản lý kỳ thi</h1>
+                        <p class="text-gray-600">Tạo, chỉnh sửa và quản lý các kỳ thi</p>
+                    </div>
+                    <button onclick="createExam()" class="flex items-center gap-2 bg-[#e53e3e] hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Tạo kỳ thi mới
+                    </button>
+                </div>
+
+                <div class="bg-white shadow-sm border border-gray-100 rounded-xl p-4">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm kỳ thi..." class="w-full bg-gray-50 text-gray-900 border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all" oninput="filterExams()" />
+                    </div>
+                </div>
+
+                <div id="examList" class="space-y-4"></div>
+
+                <div id="emptyState" class="hidden text-center py-12 text-gray-500">
+                    Không tìm thấy kỳ thi nào
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 w-96 shadow-xl">
+            <h2 class="text-lg font-semibold mb-2">Xác nhận xóa</h2>
+            <p class="text-gray-600 mb-6 text-sm">
+                Bạn có chắc chắn muốn xóa kỳ thi này? Hành động này không thể hoàn tác.
+            </p>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition-colors">
+                    Hủy
+                </button>
+                <button onclick="confirmDelete()" class="px-4 py-2 bg-[#e53e3e] text-white rounded-lg hover:bg-red-700 font-medium transition-colors">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../../data/exams.js"></script>
+    <script src="../js/exams.js"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof highlightActiveMenu === 'function') {
+                highlightActiveMenu('/admin/exams');
+            }
+        });
+    </script>
+</body>
+</html>

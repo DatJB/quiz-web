@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chỉnh sửa kỳ thi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+
+    <header class="bg-red-600 text-white shadow-md fixed px-3 pr-7 top-0 left-0 right-0 z-50">
+        <div class="px-4 py-4 flex justify-between items-center">
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="text-white hover:bg-white/10 p-2 rounded-md transition">
+                    <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+                
+                <div>
+                    <h1 class="text-xl md:text-2xl font-semibold">Quản trị hệ thống</h1>
+                    <p class="text-xs md:text-sm opacity-90 mt-1 hidden sm:block">
+                        Hệ thống thi trắc nghiệm PTIT
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative">
+                <button onclick="toggleDropdown(event)" class="flex items-center gap-2 hover:bg-white/10 px-3 py-2 rounded-lg transition">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-red-600"></i>
+                    </div>
+                    <div class="text-left hidden md:block">
+                        <p class="text-sm font-medium">Quản trị viên</p>
+                        <p class="text-xs opacity-75">Admin</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down hidden md:block text-sm ml-1"></i>
+                </button>
+
+                <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg py-1 z-50 border border-gray-100">
+                    <div class="px-4 py-3 border-b border-gray-100 flex flex-col space-y-1">
+                        <p class="text-sm font-medium">Quản trị viên</p>
+                        <p class="text-xs text-gray-500">admin@ptit.edu.vn</p>
+                    </div>
+                    <button onclick="navigate('/admin/profile')" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center">
+                        <i class="fa-solid fa-gear w-4 h-4 mr-3 text-gray-500"></i> Hồ sơ
+                    </button>
+                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600 flex items-center">
+                        <i class="fa-solid fa-right-from-bracket w-4 h-4 mr-3"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-[72px]">
+        
+        <aside id="sidebar" class="fixed lg:sticky top-[72px] left-0 h-[calc(100vh-72px)] w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-x-hidden">
+            <nav class="h-full overflow-y-auto py-6 flex flex-col justify-between overflow-x-hidden">
+                <div class="space-y-1 px-3">
+                    <button onclick="navigate('/admin/dashboard')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/dashboard">
+                        <i class="fa-solid fa-table-columns w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Dashboard</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/exams')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/exams">
+                        <i class="fa-solid fa-file-lines w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý kỳ thi</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/manage-students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/manage-students">
+                        <i class="fa-solid fa-user-gear w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý sinh viên</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/students">
+                        <i class="fa-solid fa-users w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Kết quả sinh viên</span>
+                    </button>
+
+                    <button onclick="navigate('/admin/statistics')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/statistics">
+                        <i class="fa-solid fa-chart-column w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Thống kê</span>
+                    </button>
+                </div>
+
+                <div>
+                    <div class="my-4 mx-3 border-t border-gray-200"></div>
+                    <div class="space-y-1 px-3">
+                        <button onclick="navigate('/admin/profile')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/profile">
+                            <i class="fa-solid fa-gear w-6 text-center text-lg"></i>
+                            <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Hồ sơ</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+        <main id="mainContent" class="flex-1 w-full transition-all duration-300">
+            <div class="p-6 max-w-4xl mx-auto space-y-6">
+                
+                <div class="flex items-center gap-3 mb-2">
+                    <button onclick="window.history.back()" class="text-gray-500 hover:text-red-600 transition">
+                        <i class="fa-solid fa-arrow-left text-lg"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-semibold">Chỉnh sửa kỳ thi</h1>
+                        <p class="text-sm text-gray-500 mt-1">Cập nhật thông tin và danh sách câu hỏi</p>
+                    </div>
+                </div>
+
+                <form id="editForm" onsubmit="handleSubmit(event)" class="space-y-6">
+                    <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                        <h2 class="text-lg font-semibold mb-5 text-gray-800">Thông tin cơ bản</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tên kỳ thi <span class="text-red-500">*</span></label>
+                                <input type="text" id="editTitle" required class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mô tả <span class="text-red-500">*</span></label>
+                                <textarea id="editDesc" required rows="3" class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none"></textarea>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Loại kỳ thi <span class="text-red-500">*</span></label>
+                                    <select id="editType" class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none">
+                                        <option value="practice">Luyện tập</option>
+                                        <option value="midterm">Giữa kỳ</option>
+                                        <option value="final">Cuối kỳ</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Trạng thái <span class="text-red-500">*</span></label>
+                                    <select id="editStatus" onchange="toggleScheduledDate()" class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none">
+                                        <option value="free">Tự do</option>
+                                        <option value="scheduled">Theo lịch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Thời gian (phút) <span class="text-red-500">*</span></label>
+                                    <input type="number" id="editDuration" required min="1" class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none">
+                                </div>
+                                <div id="dateContainer" class="hidden">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Thời gian bắt đầu</label>
+                                    <input type="datetime-local" id="editScheduledDate" class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-2.5 transition-all outline-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                            <h2 class="text-lg font-semibold text-gray-800" id="questionCountText">Câu hỏi (0)</h2>
+                            <div class="flex gap-3 w-full sm:w-auto">
+                                <button type="button" onclick="importExcel()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg font-medium transition-colors">
+                                    <i class="fa-solid fa-upload"></i> Import Excel
+                                </button>
+                                <button type="button" onclick="addQuestion()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#c53030] hover:bg-red-800 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                                    <i class="fa-solid fa-plus"></i> Thêm câu hỏi
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="questionsContainer" class="space-y-6"></div>
+
+                        <div id="emptyQuestions" class="text-center py-10 hidden">
+                            <p class="text-gray-500">Chưa có câu hỏi nào. Nhấn "Thêm câu hỏi" để bắt đầu.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 pt-4 pb-10">
+                        <button type="button" onclick="window.history.back()" class="flex-1 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg font-semibold transition-colors">
+                            Hủy
+                        </button>
+                        <button type="submit" class="flex-1 bg-[#e53e3e] hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-save"></i> Cập nhật kỳ thi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../../data/exams.js"></script>
+    <script src="../js/exam-edit.js"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                if (typeof highlightActiveMenu === 'function') {
+                    highlightActiveMenu('/admin/exams');
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
