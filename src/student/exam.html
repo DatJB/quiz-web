@@ -260,13 +260,15 @@
             const result = {
                 examId: exam.id,
                 answers: answers,
+                correctAnswers: correctCount,
+                totalQuestions: exam.questions.length,
                 score: (correctCount / exam.questions.length) * 10,
                 completedAt: new Date().toISOString()
             };
 
             localStorage.setItem(`result-${exam.id}`, JSON.stringify(result));
 
-            window.location.href = "result.html";
+            window.location.href = `result.html?examId=${exam.id}`;
         }
 
      </script>
