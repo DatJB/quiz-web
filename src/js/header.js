@@ -65,7 +65,7 @@ function navigate(path) {
     }
     console.log("Navigating to:", path);
     highlightActiveMenu(path);
-    window.location.href = `../${path + ".html"}`;
+    window.location.href = `..${path + ".html"}`;
 }
 
 // Logout
