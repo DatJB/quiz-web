@@ -114,6 +114,7 @@ function highlightCurrentMenu() {
 
     console.log(path);
     if (path === "/admin/exam-create" || path === "/admin/exam-edit") path = "/admin/exams";
+    if (path === "/admin/student-create" || path === "/admin/student-edit") path = "/admin/students"; 
 
     highlightActiveMenu(path);
 }

@@ -52,7 +52,7 @@ function renderStudents(data) {
                 <td class="py-3 px-4">
                     <div class="flex items-center gap-2 text-gray-600">
                         <img src="../../images/mail.svg"
-                            class="w-4 h-4 opacity-80"
+                            class="w-4 h-4 opacity-80 mt-0.5"
                             alt="mail icon" />
                         <span class="text-sm">${student.email}</span>
                     </div>
