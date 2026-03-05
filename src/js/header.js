@@ -11,8 +11,11 @@ function toggleSidebar() {
             // Thu gọn
             sidebar.classList.replace("w-64", "w-16");
             menuTexts.forEach(text => text.classList.add("hidden"));
+
             main.classList.remove("lg:ml-64");
             main.classList.add("lg:ml-16");
+
+            localStorage.setItem("sidebarState", "collapsed");
         } else {
             // Mở rộng
             sidebar.classList.replace("w-16", "w-64");
@@ -20,6 +23,8 @@ function toggleSidebar() {
 
             main.classList.remove("lg:ml-16");
             main.classList.add("lg:ml-64");
+
+            localStorage.setItem("sidebarState", "expanded");
         }
     } else {
         // Xử lý đóng/mở cho Mobile
@@ -27,6 +32,36 @@ function toggleSidebar() {
         overlay.classList.toggle("hidden");
     }
 }
+
+// // Sidebar state
+// document.addEventListener("DOMContentLoaded", () => {
+//     const sidebar = document.getElementById("sidebar");
+//     console.log(sidebar);
+//     const main = document.getElementById("mainContent");
+//     const menuTexts = document.querySelectorAll(".menu-text");
+
+//     const savedState = localStorage.getItem("sidebarState");
+
+//     if (savedState === "collapsed" && window.innerWidth >= 1024) {
+//         sidebar.classList.remove("w-64");
+//         sidebar.classList.add("w-16");
+
+//         menuTexts.forEach(text => text.classList.add("hidden"));
+
+//         main.classList.remove("lg:ml-64");
+//         main.classList.add("lg:ml-16");
+//     }
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const path = window.location.pathname
+//         .split("/src")[1]     
+//         .replace(".html", ""); 
+
+//     console.log(path);
+
+//     highlightActiveMenu(path);
+// });
 
 // Reset sizebar
 window.addEventListener('resize', () => {
@@ -81,6 +116,7 @@ function highlightActiveMenu(currentPath) {
 
     menuItems.forEach(item => {
         const itemPath = item.getAttribute("data-path");
+        console.log(itemPath)
         if (currentPath === itemPath) {
             item.classList.add("bg-red-600", "text-white");
             item.classList.remove("text-gray-700", "hover:bg-gray-100");

@@ -26,16 +26,16 @@
                 <i class="fa-solid fa-chevron-down hidden md:block text-sm ml-1"></i>
             </button>
 
-            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg py-1 z-50 border border-gray-100">
+            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-50 lg:w-full bg-white text-black rounded-lg shadow-lg py-1 z-50 border border-gray-100">
                 <div class="px-4 py-3 border-b border-gray-100 flex flex-col space-y-1">
                     <p class="text-sm font-medium">Quản trị viên</p>
                     <p class="text-xs text-gray-500">admin@ptit.edu.vn</p>
                 </div>
-                <button onclick="navigate('/admin/profile')" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center">
-                    <i class="fa-solid fa-gear w-4 h-4 mr-3 text-gray-500"></i> Hồ sơ
+                <button onclick="navigate('/admin/profile')" class="w-full  text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center">
+                    <i class="fa-solid fa-gear w-4 h-4 mt-1 mr-3 text-gray-500"></i> Hồ sơ
                 </button>
                 <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600 flex items-center">
-                    <i class="fa-solid fa-right-from-bracket w-4 h-4 mr-3"></i> Đăng xuất
+                    <i class="fa-solid fa-right-from-bracket w-4 h-4 mr-3 mt-1"></i> Đăng xuất
                 </button>
             </div>
         </div>
@@ -76,11 +76,16 @@
             </div>
 
             <div>
-                <div class="my-4 mx-3 border-t border-gray-200"></div>
+                <div class="my-4 mx-3 border-t border-gray-300"></div>
                 <div class="space-y-1 px-3">
                     <button onclick="navigate('/admin/profile')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/profile">
                         <i class="fa-solid fa-gear w-6 text-center text-lg"></i>
                         <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Hồ sơ</span>
+                    </button>
+
+                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm  hover:bg-gray-100 text-red-600 flex items-center rounded-lg">
+                        <i class="fa-solid fa-right-from-bracket  w-6 text-center text-lg -ml-0.5"></i> 
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Đăng xuất</span>
                     </button>
                 </div>
             </div>

@@ -74,7 +74,7 @@ const defaultUsers = [
 ];
 
 function initUsers() {
-    if (!localStorage.getItem("users")) {
-        localStorage.setItem("users", JSON.stringify(defaultUsers));
-    }
+  if (!localStorage.getItem("users")) {
+    localStorage.setItem("users", JSON.stringify(defaultUsers));
+  }
 }
