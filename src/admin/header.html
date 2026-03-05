@@ -1,0 +1,90 @@
+<header class="bg-red-600 text-white position-sticky shadow-md fixed px-3 pr-7 top-0 left-0 right-0 z-50">
+    <div class="px-4 py-4 flex justify-between items-center">
+        
+        <div class="flex items-center gap-4">
+            <button onclick="toggleSidebar()" class="text-white hover:bg-white/10 p-2 rounded-md transition">
+                <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+            
+            <div>
+                <h1 class="text-xl md:text-2xl font-semibold">Quản trị hệ thống</h1>
+                <p class="text-xs md:text-sm opacity-90 mt-1 hidden sm:block">
+                    Hệ thống thi trắc nghiệm PTIT
+                </p>
+            </div>
+        </div>
+
+        <div class="relative">
+            <button onclick="toggleDropdown(event)" class="flex items-center gap-2 hover:bg-white/10 px-3 py-2 rounded-lg transition">
+                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-red-600"></i>
+                </div>
+                <div class="text-left hidden md:block">
+                    <p class="text-sm font-medium">Quản trị viên</p>
+                    <p class="text-xs opacity-75">Admin</p>
+                </div>
+                <i class="fa-solid fa-chevron-down hidden md:block text-sm ml-1"></i>
+            </button>
+
+            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg py-1 z-50 border border-gray-100">
+                <div class="px-4 py-3 border-b border-gray-100 flex flex-col space-y-1">
+                    <p class="text-sm font-medium">Quản trị viên</p>
+                    <p class="text-xs text-gray-500">admin@ptit.edu.vn</p>
+                </div>
+                <button onclick="navigate('/admin/profile')" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center">
+                    <i class="fa-solid fa-gear w-4 h-4 mr-3 text-gray-500"></i> Hồ sơ
+                </button>
+                <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600 flex items-center">
+                    <i class="fa-solid fa-right-from-bracket w-4 h-4 mr-3"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="flex pt-[72px]">
+    
+    <aside id="sidebar" 
+            class="fixed lg:position-sticky top-[72px] left-0 h-[calc(100vh-72px)] w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-all duration-300 z-40 overflow-x-hidden">
+        <nav class="h-full overflow-y-auto py-6 flex flex-col justify-between overflow-x-hidden">
+            
+            <div class="space-y-1 px-3">
+                <button onclick="navigate('/admin/dashboard')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/dashboard">
+                    <i class="fa-solid fa-table-columns w-6 text-center text-lg"></i>
+                    <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Dashboard</span>
+                </button>
+
+                <button onclick="navigate('/admin/exams')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/exams">
+                    <i class="fa-solid fa-file-lines w-6 text-center text-lg"></i>
+                    <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý kỳ thi</span>
+                </button>
+
+                <button onclick="navigate('/admin/manage-students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/manage-students">
+                    <i class="fa-solid fa-user-gear w-6 text-center text-lg"></i>
+                    <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Quản lý sinh viên</span>
+                </button>
+
+                <button onclick="navigate('/admin/students')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/students">
+                    <i class="fa-solid fa-users w-6 text-center text-lg"></i>
+                    <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Kết quả sinh viên</span>
+                </button>
+
+                <button onclick="navigate('/admin/statistics')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/statistics">
+                    <i class="fa-solid fa-chart-column w-6 text-center text-lg"></i>
+                    <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Thống kê</span>
+                </button>
+            </div>
+
+            <div>
+                <div class="my-4 mx-3 border-t border-gray-200"></div>
+                <div class="space-y-1 px-3">
+                    <button onclick="navigate('/admin/profile')" class="menu-item w-full flex items-center px-3 py-3 rounded-lg transition-colors duration-200 text-gray-700 hover:bg-gray-100" data-path="/admin/profile">
+                        <i class="fa-solid fa-gear w-6 text-center text-lg"></i>
+                        <span class="menu-text font-medium text-left ml-3 flex-1 whitespace-nowrap">Hồ sơ</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+</div>
