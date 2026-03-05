@@ -5,7 +5,7 @@ fetch("header.html")
     .then(() => {
         highlightCurrentMenu();
         restoreSidebarState();
-    });;
+    });
 
 let originalUserData = null;
 

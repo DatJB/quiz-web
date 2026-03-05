@@ -30,44 +30,59 @@
             </div>
         </div>
      </header>
+ 
 
-     <main class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Question -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <h2 id="questionText" class="text-lg font-semibold mb-4"></h2>
-            <div id="options"></div>
-        </div>
+    <main class="container mx-auto px-4 py-8 max-w-6xl mt-5">      
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left: Question Grid -->
+            <div class="lg:col-span-1 bg-white shadow rounded-lg p-6 h-fit">
+                <h3 class="text-lg font-semibold mb-4">Danh sách câu hỏi</h3>
 
-        <!-- Navigation -->
-         <div class="mt-6 flex justify-between">
-            <button id="prevBtn" class="px-4 py-2 border bg-white/10 font-semibold rounded-lg hover:bg-black/10">Câu trước</button>
-            <button id="nextBtn" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:opacity-90">Câu tiếp theo</button>
-         </div>
+                <div id="questionGrid" class="grid grid-cols-5 gap-2"></div>
 
-        <!-- Question grid-->
-         <div class="mt-6 bg-white shadow rounded-lg p-6">
-            <h3 class="text-lg font-semibold mb-4">Danh sách câu hỏi</h3>
-            <div id="questionGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+                <!-- Legend -->
+                <div class="flex flex-col gap-3 mt-10 text-sm">
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 bg-red-600 rounded-md"></div>
+                        <span>Đang làm</span>
+                    </div>
 
-            <!-- Legend -->
-            <div class="flex items-center gap-6 mt-6">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-red-600 rounded-md"></div>
-                    <span>Đang làm</span>
-                </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 bg-green-200 rounded-md"></div>
+                        <span>Đã trả lời</span>
+                    </div>
 
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-green-200 rounded-md"></div>
-                    <span>Đã trả lời</span>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-md border"></div>
-                    <span>Chưa trả lời</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 rounded-md border"></div>
+                        <span>Chưa trả lời</span>
+                    </div>
                 </div>
             </div>
-         </div>
-     </main>
+
+
+            <!-- Right: Question -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Question -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 id="questionText" class="text-lg font-semibold mb-4"></h2>
+                    <div id="options"></div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between">
+                    <button id="prevBtn"
+                        class="px-4 py-2 border bg-white/10 font-semibold rounded-lg hover:bg-black/10">
+                        Câu trước
+                    </button>
+
+                    <button id="nextBtn"
+                        class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:opacity-90">
+                        Câu tiếp theo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <!-- Submit modal -->
      <div id="submitDialog" class="fixed inset-0 bg-black/40 hidden items-center justify-center">

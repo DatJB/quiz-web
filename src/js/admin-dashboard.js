@@ -3,8 +3,9 @@ fetch("header.html")
     .then(res => res.text())
     .then(data => document.getElementById("header-container").innerHTML = data)
     .then(() => {
-        highlightActiveMenu();
-    });;
+        highlightCurrentMenu();
+        restoreSidebarState();
+});
 
 // Dashboard
 const mockExams = JSON.parse(localStorage.getItem("exams"));
@@ -42,10 +43,10 @@ stats.forEach((stat, index) => {
 
 // Quick actions
 const quickActions = [
-    { title: "Quản lý kỳ thi", icon: `<i class="fa-solid fa-file-lines text-xl mt-0.5"></i>`, path: "exams.html", color: "bg-[#2B7FFF]", description: "Thêm, sửa, xóa các kỳ thi" },
-    { title: "Quản lý sinh viên", icon: `<i class="fa-solid fa-user-gear text-lg mt-0.5"></i>`, path: "manage-students.html", color: "bg-[#F6339A]", description: "Thêm, sửa, xóa tài khoản sinh viên" },
-    { title: "Kết quả sinh viên", icon: `<i class="fa-solid fa-users text-lg mt-0.5"></i>`, path: "students.html", color: "bg-[#AD46FF]", description: "Xem điểm và chi tiết bài làm" },
-    { title: "Thống kê", icon: `<i class="fa-solid fa-chart-column text-lg mt-0.5"></i>`, path: "statistics.html", color: "bg-[#00C951]", description: "Xem báo cáo và biểu đồ" },
+    { title: "Quản lý kỳ thi", icon: `<i class="fa-solid fa-file-lines text-xl mt-0.5"></i>`, path: "/admin/exams", color: "bg-[#2B7FFF]", description: "Thêm, sửa, xóa các kỳ thi" },
+    { title: "Quản lý sinh viên", icon: `<i class="fa-solid fa-user-gear text-lg mt-0.5"></i>`, path: "/admin/manage-students", color: "bg-[#F6339A]", description: "Thêm, sửa, xóa tài khoản sinh viên" },
+    { title: "Kết quả sinh viên", icon: `<i class="fa-solid fa-users text-lg mt-0.5"></i>`, path: "/admin/students", color: "bg-[#AD46FF]", description: "Xem điểm và chi tiết bài làm" },
+    { title: "Thống kê", icon: `<i class="fa-solid fa-chart-column text-lg mt-0.5"></i>`, path: "/admin/statistics", color: "bg-[#00C951]", description: "Xem báo cáo và biểu đồ" },
 ];
 
 const quickContainer = document.getElementById("quickActions");

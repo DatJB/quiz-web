@@ -108,9 +108,12 @@ function handleLogout() {
 }
 
 function highlightCurrentMenu() {
-    const path = window.location.pathname
+    let path = window.location.pathname
         .split("/src")[1]
         .replace(".html", "");
+
+    console.log(path);
+    if (path === "/admin/exam-create" || path === "/admin/exam-edit") path = "/admin/exams";
 
     highlightActiveMenu(path);
 }

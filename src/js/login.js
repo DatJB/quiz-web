@@ -67,5 +67,5 @@ function processSuccessfulLogin(user) {
     } else {
       window.location.href = "../student/home.html";
     }
-  }, 1500);
+  }, 1000);
 }
