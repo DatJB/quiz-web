@@ -1,3 +1,12 @@
+// Load header
+fetch("header.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("header-container").innerHTML = data)
+    .then(() => {
+        highlightCurrentMenu();
+        restoreSidebarState();
+    });
+
 initUsers();
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -43,7 +52,7 @@ if (isEdit) {
         studentCodeInput.value = student.studentCode;
         nameInput.value = student.fullName;
         emailInput.value = student.email;
-        classInput.value = student.studentClass;
+        classInput.value = student.studentClass ? student.studentClass : "D20CQCN05-B";
 
         studentCodeInput.disabled = true;
         studentCodeInput.classList.add("bg-gray-100", "cursor-not-allowed");

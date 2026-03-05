@@ -5,7 +5,7 @@ fetch("header.html")
     .then(() => {
         highlightCurrentMenu();
         restoreSidebarState();
-});
+    });
 
 // Dashboard
 const mockExams = JSON.parse(localStorage.getItem("exams"));

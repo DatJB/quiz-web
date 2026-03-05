@@ -1,3 +1,12 @@
+// Load header
+fetch("header.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("header-container").innerHTML = data)
+    .then(() => {
+        highlightCurrentMenu();
+        restoreSidebarState();
+    });
+
 initUsers();
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let students = users.filter(user => user.role === "student");
@@ -67,6 +76,10 @@ function selectStudent(studentId) {
     selectedStudent = studentId;
     renderStudents();
     renderStudentDetail();
+}
+
+function safeOption(option) {
+    return option.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function renderStudentDetail() {
@@ -172,7 +185,7 @@ function renderStudentDetail() {
                                                                     <strong>
                                                                         ${
                                                                             userAnswer !== undefined
-                                                                                ? `${String.fromCharCode(65 + userAnswer)}. ${q.options[userAnswer]}`
+                                                                                ? `${String.fromCharCode(65 + userAnswer)}. ${safeOption(q.options[userAnswer])}`
                                                                                 : 'Chưa trả lời'
                                                                         }
                                                                     </strong>
@@ -185,7 +198,14 @@ function renderStudentDetail() {
                                                                 <span>
                                                                     Đáp án:
                                                                     <strong class="${isCorrect ? 'text-green-700' : 'text-red-700'}">
-                                                                        ${String.fromCharCode(65 + q.correctAnswer)}. ${q.options[q.correctAnswer]}
+                                                                        ${String.fromCharCode(65 + q.correctAnswer)}. ${safeOption(q.options[q.correctAnswer])}
+                                                                    </strong>
+                                                                </span>
+
+                                                                <span>
+                                                                    Giải thích:
+                                                                    <strong>
+                                                                        ${q.explanation}
                                                                     </strong>
                                                                 </span>
 
