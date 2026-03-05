@@ -33,35 +33,33 @@ function toggleSidebar() {
     }
 }
 
-// // Sidebar state
-// document.addEventListener("DOMContentLoaded", () => {
-//     const sidebar = document.getElementById("sidebar");
-//     console.log(sidebar);
-//     const main = document.getElementById("mainContent");
-//     const menuTexts = document.querySelectorAll(".menu-text");
+function restoreSidebarState() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("mainContent");
+    const menuTexts = document.querySelectorAll(".menu-text");
 
-//     const savedState = localStorage.getItem("sidebarState");
+    const savedState = localStorage.getItem("sidebarState");
 
-//     if (savedState === "collapsed" && window.innerWidth >= 1024) {
-//         sidebar.classList.remove("w-64");
-//         sidebar.classList.add("w-16");
+    if (savedState === "collapsed" && window.innerWidth >= 1024) {
 
-//         menuTexts.forEach(text => text.classList.add("hidden"));
+        sidebar.classList.remove("w-64");
+        sidebar.classList.add("w-16");
 
-//         main.classList.remove("lg:ml-64");
-//         main.classList.add("lg:ml-16");
-//     }
-// });
+        menuTexts.forEach(text => text.classList.add("hidden"));
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const path = window.location.pathname
-//         .split("/src")[1]     
-//         .replace(".html", ""); 
+        main.classList.remove("lg:ml-64");
+        main.classList.add("lg:ml-16");
+    } else if (savedState === "expanded" && window.innerWidth >= 1024) {
 
-//     console.log(path);
+        sidebar.classList.remove("w-16");
+        sidebar.classList.add("w-64");
 
-//     highlightActiveMenu(path);
-// });
+        menuTexts.forEach(text => text.classList.remove("hidden"));
+
+        main.classList.remove("lg:ml-16");
+        main.classList.add("lg:ml-64");
+    }
+}
 
 // Reset sizebar
 window.addEventListener('resize', () => {
@@ -107,6 +105,14 @@ function navigate(path) {
 function handleLogout() {
     localStorage.removeItem("currentUser");
     window.location.href = "../auth/login.html";
+}
+
+function highlightCurrentMenu() {
+    const path = window.location.pathname
+        .split("/src")[1]
+        .replace(".html", "");
+
+    highlightActiveMenu(path);
 }
 
 // Highlight Active Menu
