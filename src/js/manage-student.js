@@ -8,6 +8,14 @@ const searchInput = document.getElementById("searchInput");
 const emptyBox = document.getElementById("emptyBox");
 const studentCount = document.getElementById("studentCount");
 
+function goToAddStudent() {
+    window.location.href = "student-create.html";
+};
+
+function goToEditStudent(id) {
+    window.location.href = `student-edit.html?studentId=${id}`;
+}
+
 function renderStudents(data) {
     studentTable.innerHTML = "";
 
@@ -31,11 +39,11 @@ function renderStudents(data) {
                         <span>${student.fullName}</span>
                     </div>
                 </td>
-                <td class="py-3 px-4">${student.className || ""}</td>
+                <td class="py-3 px-4">${student.studentClass || ""}</td>
                 <td class="py-3 px-4">
                     <div class="flex items-center gap-2 text-gray-600">
                         <img src="../../images/mail.svg"
-                            class="w-4 h-4 opacity-80"
+                            class="w-5 h-5 opacity-80"
                             alt="mail icon" />
                         <span>${student.email}</span>
                     </div>
@@ -43,8 +51,8 @@ function renderStudents(data) {
                 <td class="py-3 px-4 text-gray-600">${formatDate(student.createdAt)}</td>
                 <td class="py-3 px-4">
                     <div class="flex justify-center items-center gap-2"> 
-                        <button onclick="editStudent('${student.id}')" 
-                            class="p-2 border border-gray-300 rounded-lg hover:bg-gray-200 transition-all duration-200"
+                        <button onclick="goToEditStudent('${student.id}')" 
+                            class="p-2 border border-gray-300 rounded-xl hover:bg-gray-200 transition-all duration-200"
                         >   
                             <img src="../../images/edit.svg" class="w-5 h-5">
                         </button>
@@ -72,8 +80,8 @@ function formatDate(dateString) {
     return date.toLocaleDateString("vi-VN");
 }
 
-searchInput.addEventListener("input", function(e) {
-    const keyword = e.target.value.toLowerCase();
+function handleSearch() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
 
     const filtered = students.filter(student => 
         student.fullName.toLowerCase().includes(keyword) ||
@@ -82,7 +90,8 @@ searchInput.addEventListener("input", function(e) {
     );
 
     renderStudents(filtered);
-});
+};
+
 
 function deleteStudent(id) {
     if (!confirm("Bạn có chắc muốn xóa sinh viên này?")) return;

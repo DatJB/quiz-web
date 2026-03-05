@@ -48,10 +48,10 @@ const defaultExam = [
         id: "q4",
         question: "Thẻ nào dùng để tạo liên kết trong HTML?",
         options: [
-          "<link>",
-          "<a>",
-          "<href>",
-          "<url>"
+          "link",
+          "a",
+          "href",
+          "url"
         ],
         correctAnswer: 1,
         explanation: "Thẻ <a> (anchor) được sử dụng để tạo liên kết trong HTML."
