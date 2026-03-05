@@ -30,16 +30,15 @@ const statsContainer = document.getElementById("stats");
 stats.forEach((stat, index) => {
     statsContainer.innerHTML += `
         <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-            <p class="text-md text-gray-600">${stat.title}</p>
+            <p class="font-medium text-gray-500">${stat.title}</p>
             <p class="text-3xl font-semibold mt-2">${stat.value}</p>
 
-            <div class="${index !== 3 ? "text-green-500" : "text-red-500"} ${stat.color} rounded-lg mt-4">
+            <div class="${index !== 3 ? "text-green-500" : "text-red-500"} ${stat.color} rounded-lg mt-4 font-semibold">
                 ${index !== 3 ? `<i class="fa-solid fa-arrow-trend-up mr-1"></i>` : `<i class="fa-solid fa-arrow-trend-down mr-1"></i>`} ${stat.description}
             </div>
         </div>
     `;
 });
-
 
 // Quick actions
 const quickActions = [
