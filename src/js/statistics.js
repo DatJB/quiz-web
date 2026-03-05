@@ -213,11 +213,11 @@ function handleExportPDF() {
         return;
     }
 
-    alert("Đang chuẩn bị file PDF. Quá trình này có thể mất vài giây...");
+    alert("Quá trình tải xuống sẽ được thực hiện.");
 
     const opt = {
         margin:       0.3, 
-        filename:     'Bao_Cao_Thong_Ke.pdf',
+        filename:     'Thong_ke_ket_qua_thi.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 }, 
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
@@ -260,5 +260,17 @@ function handleExportExcel() {
     const workbook = XLSX.utils.book_new();
     
     XLSX.utils.book_append_sheet(workbook, worksheet, "ThongKeKetQua");
-    XLSX.writeFile(workbook, "Thong_Ke_Ket_Qua.xlsx");
+    XLSX.writeFile(workbook, "Ket_qua_thi.xlsx");
 }
+
+fetch("../admin/header.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("header-container").innerHTML = data;
+    })
+    .then(() => {
+        if (typeof highlightActiveMenu === 'function') {
+            highlightActiveMenu('/admin/statistics');
+        }
+    })
+    .catch(err => console.error("Lỗi Fetch HTML:", err));

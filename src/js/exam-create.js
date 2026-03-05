@@ -16,15 +16,10 @@ document.getElementById("excelInput").addEventListener("change", function(e) {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, {type: 'array'});
         
-        // Lấy dữ liệu từ Sheet đầu tiên
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
-        
-        // Chuyển Sheet thành mảng JSON
         const json = XLSX.utils.sheet_to_json(worksheet);
 
-        // Map dữ liệu từ Excel vào cấu trúc của chúng ta
-        // Dùng String() để tránh lỗi hàm .trim()
         const importedQuestions = json.map(row => ({
             id: `q_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
             question: row["Câu hỏi"] != null ? String(row["Câu hỏi"]) : "",
@@ -34,18 +29,14 @@ document.getElementById("excelInput").addEventListener("change", function(e) {
                 row["Đáp án C"] != null ? String(row["Đáp án C"]) : "", 
                 row["Đáp án D"] != null ? String(row["Đáp án D"]) : ""
             ],
-            // Ép kiểu về số nguyên (0, 1, 2, 3 tương ứng A, B, C, D)
             correctAnswer: parseInt(row["Vị trí đúng (0-3)"]) || 0, 
             explanation: row["Giải thích"] != null ? String(row["Giải thích"]) : ""
         }));
 
-        // Gộp vào danh sách hiện tại và vẽ lại UI
         currentQuestions = [...currentQuestions, ...importedQuestions];
         updateQuestionUI();
         
         alert(`Đã import thành công ${importedQuestions.length} câu hỏi!`);
-        
-        // Reset lại input để có thể chọn lại file đó nếu cần
         document.getElementById("excelInput").value = ""; 
     };
     
@@ -66,17 +57,14 @@ function addQuestion() {
     updateQuestionUI();
 }
 
-// Cập nhật giá trị vào mảng khi người dùng gõ
 function updateQuestion(index, field, value) {
     currentQuestions[index][field] = value;
 }
 
-// Cập nhật mảng đáp án khi người dùng gõ
 function updateOption(qIndex, optIndex, value) {
     currentQuestions[qIndex].options[optIndex] = value;
 }
 
-// Xóa câu hỏi
 function removeQuestion(index) {
     if(confirm("Bạn có chắc muốn xóa câu hỏi này?")) {
         currentQuestions.splice(index, 1);
@@ -102,7 +90,6 @@ function updateQuestionUI() {
 
         questionList.innerHTML = currentQuestions.map((q, index) => `
             <div class="border-l-4 border-[#e53e3e] bg-white border-y border-r border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
-                
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-semibold text-gray-800 text-lg">Câu hỏi ${index + 1}</h3>
                     <button type="button" onclick="removeQuestion(${index})" class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-md transition-colors">
@@ -146,7 +133,6 @@ function updateQuestionUI() {
                         class="w-full bg-gray-50 border border-gray-200 focus:bg-white focus:border-red-500 focus:ring-2 focus:ring-red-100 rounded-lg px-4 py-3 outline-none transition-all">${q.explanation}</textarea>
                     </div>
                 </div>
-
             </div>
         `).join("");
     }
@@ -160,7 +146,6 @@ function submitExam() {
     const status = document.getElementById("examStatus").value;
     const duration = document.getElementById("examDuration").value;
 
-    // Kiểm tra nội dung 
     if (!name.trim() || !desc.trim() || !duration) {
         alert("Vui lòng điền đầy đủ các thông tin cơ bản bắt buộc (*)");
         return;
@@ -171,7 +156,6 @@ function submitExam() {
         return;
     }
     
-    //Dùng String() bao bọc để đảm bảo hàm .trim() hoạt động với nội dung định dạng số
     for (let i = 0; i < currentQuestions.length; i++) {
         const q = currentQuestions[i];
         if (!String(q.question).trim()) {
@@ -184,7 +168,6 @@ function submitExam() {
         }
     }
 
-    // Lấy giá trị ngày 
     const dateInput = document.getElementById("scheduledDate");
     const scheduledDateValue = (status === "scheduled" && dateInput) ? dateInput.value : null;
 
@@ -200,13 +183,23 @@ function submitExam() {
         questions: currentQuestions
     };
 
-    // Lưu vào LocalStorage
     let savedExams = JSON.parse(localStorage.getItem("exams")) || [];
     savedExams.push(newExamData); 
     localStorage.setItem("exams", JSON.stringify(savedExams)); 
 
     alert("Tạo kỳ thi thành công!");
-    
-    // Chuyển trang
     window.location.href = "exams.html";
 }
+
+fetch("../admin/header.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("header-container").innerHTML = data;
+    })
+    .then(() => {
+        //Bôi đậm nút menu
+        if (typeof highlightActiveMenu === 'function') {
+            highlightActiveMenu('/admin/exams');
+        }
+    })
+    .catch(err => console.error("Lỗi Fetch HTML:", err));

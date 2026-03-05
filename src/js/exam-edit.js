@@ -198,3 +198,16 @@ function handleSubmit(e) {
     // Quay lại trang quản lý đề thi
     window.location.href = "exams.html";
 }
+// Lưu ý: Đường dẫn URL phải trỏ tới file header.html
+fetch("../admin/header.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("header-container").innerHTML = data;
+    })
+    .then(() => {
+        //Bôi đậm nút menu
+        if (typeof highlightActiveMenu === 'function') {
+            highlightActiveMenu('/admin/exams');
+        }
+    })
+    .catch(err => console.error("Lỗi Fetch HTML:", err));
