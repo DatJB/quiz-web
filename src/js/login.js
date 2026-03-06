@@ -59,7 +59,7 @@ function processSuccessfulLogin(user) {
     role: user.role
   };
 
-  localStorage.setItem(STORAGE_KEY.CURRENT_USER, JSON.stringify(sessionData));
+  localStorage.setItem(STORAGE_KEY.CURRENT_USER, JSON.stringify(user));
   showToast("Đăng nhập thành công!", TOAST_TYPE.SUCCESS);
   setTimeout(() => {
     if (user.role === ROLE.ADMIN) {
