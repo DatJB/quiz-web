@@ -61,15 +61,15 @@ function renderStudents(data) {
                 <td class="py-3 px-4">
                     <div class="flex justify-center items-center gap-2"> 
                         <button onclick="goToEditStudent('${student.id}')" 
-                            class="p-2 border border-gray-300 rounded-xl hover:bg-gray-200 transition-all duration-200"
+                            class="p-0 lg:p-2 border border-gray-300 rounded-xl hover:bg-gray-200 transition-all duration-200"
                         >   
-                            <img src="../../images/edit.svg" class="w-4 h-4">
+                            <img src="../../images/edit.svg" class="lg:w-4 w-10 lg:h-4 h-10">
                         </button>
                             
                         <button onclick="deleteStudent('${student.id}')" 
-                            class="p-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-100 transition-all duration-200"
+                            class="p-0 lg:p-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-100 transition-all duration-200"
                         >
-                            <img src="../../images/trash.svg" class="w-4 h-4">
+                            <img src="../../images/trash.svg" class="lg:w-4 w-10 lg:h-4 h-10">
                         </button>
                     </div>
                 </td>

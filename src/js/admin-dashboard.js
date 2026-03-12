@@ -6,11 +6,13 @@ fetch("header.html")
         highlightCurrentMenu();
         restoreSidebarState();
     });
-
+initResults();
 // Dashboard
 const mockExams = JSON.parse(localStorage.getItem("exams"));
 const mockStudents = JSON.parse(localStorage.getItem("users"));
 const mockResults = JSON.parse(localStorage.getItem("results"));
+
+console.log(mockExams)
 
 const totalExams = mockExams.length;
 const totalStudents = mockStudents.length;
