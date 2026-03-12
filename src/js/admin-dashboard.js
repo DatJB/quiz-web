@@ -6,6 +6,8 @@ fetch("header.html")
         highlightCurrentMenu();
         restoreSidebarState();
     });
+initUsers();
+initExams();
 initResults();
 // Dashboard
 const mockExams = JSON.parse(localStorage.getItem("exams"));
