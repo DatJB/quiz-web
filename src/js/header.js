@@ -4,11 +4,10 @@ function toggleSidebar() {
     const menuTexts = document.querySelectorAll(".menu-text");
     const main = document.getElementById("mainContent");
 
-    // Check desktop or mobile UI
+    // Check desktop or mobile
     if (window.innerWidth >= 1024) { 
-        // Xử lý thu gọn/mở rộng cho Desktop
         if (sidebar.classList.contains("w-64")) {
-            // Thu gọn
+            // Collapse
             sidebar.classList.replace("w-64", "w-16");
             menuTexts.forEach(text => text.classList.add("hidden"));
 
@@ -17,7 +16,7 @@ function toggleSidebar() {
 
             localStorage.setItem("sidebarState", "collapsed");
         } else {
-            // Mở rộng
+            // Extend
             sidebar.classList.replace("w-16", "w-64");
             menuTexts.forEach(text => text.classList.remove("hidden"));
 
@@ -27,7 +26,7 @@ function toggleSidebar() {
             localStorage.setItem("sidebarState", "expanded");
         }
     } else {
-        // Xử lý đóng/mở cho Mobile
+        // Mobile
         sidebar.classList.toggle("-translate-x-full");
         overlay.classList.toggle("hidden");
     }
