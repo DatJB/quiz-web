@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <div class="flex">
+        <!-- Main Content -->
+        <main id="mainContent" class="flex-1 p-6 ml-2 space-y-6 transition-all duration-300 lg:ml-64 mt-6">
+
+            <!-- Statistics -->
+            <div id="stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+            <!-- Quick Actions -->
+            <div>
+                <h2 class="text-xl mb-4 font-semibold">Thao tác nhanh</h2>
+                <div id="quickActions" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-lg font-semibold mb-4">Hoạt động gần đây</h2>
+                <div id="recentActivity" class="space-y-4"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../../frontend/data/results.js"></script>
+    <script src="../../frontend/data/users.js"></script>
+    <script src="../../frontend/data/exams.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+
+</body>
+</html>

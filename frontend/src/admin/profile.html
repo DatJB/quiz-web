@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ Admin - Hệ thống thi trắc nghiệm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-50">
+
+<div id="header-container"></div>
+
+<main id="mainContent" class=" mx-auto px-4 py-6 lg:ml-64 transition-all duration-300">
+
+  <div class="container flex items-center space-y-6 mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <button id="btnBack" class="p-2 hover:bg-white/10 rounded-md transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+        </button>
+        <div>
+          <h1 class="text-2xl font-semibold">Hồ sơ Quản trị viên</h1>
+          <p class="text-sm opacity-90 mt-1">Quản lý thông tin tài khoản Admin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-2xl mx-auto space-y-6 mt-1">
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+      <div class="flex flex-row items-center justify-between border-b border-gray-100 px-6 py-4">
+        <h2 class="text-lg font-bold text-gray-800">Thông tin cá nhân</h2>
+        <button id="btnEditProfile"
+                class="bg-[#EC3136] hover:bg-[#B8232A] text-white px-3 py-1.5 rounded-md text-sm font-medium transition-colors shadow-sm">
+          Chỉnh sửa
+        </button>
+      </div>
+
+      <div class="p-6">
+        <div class="flex justify-center mb-6">
+          <div
+              class="w-24 h-24 bg-[#EC3136] rounded-full flex items-center justify-center shadow-inner">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <form id="profileForm" class="space-y-4">
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Tên đăng nhập</label>
+            <input type="text" id="profUsername" disabled
+                   class="w-full border border-gray-200 bg-gray-50 text-gray-600 rounded-md px-4 py-2 text-sm cursor-not-allowed"/>
+            <p class="text-xs text-gray-400 mt-1">* Tên đăng nhập không thể thay đổi</p>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Họ và tên</label>
+            <input type="text" id="profFullName" disabled
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136] disabled:bg-gray-50 disabled:text-gray-600 disabled:border-gray-200 transition-colors"/>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="profEmail" disabled
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136] disabled:bg-gray-50 disabled:text-gray-600 disabled:border-gray-200 transition-colors"/>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Số điện thoại</label>
+            <input type="text" id="profPhone" disabled
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136] disabled:bg-gray-50 disabled:text-gray-600 disabled:border-gray-200 transition-colors"/>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Vai trò</label>
+            <input type="text" value="Quản trị viên hệ thống" disabled
+                   class="w-full border border-gray-200 bg-gray-50 text-gray-600 rounded-md px-4 py-2 text-sm cursor-not-allowed"/>
+          </div>
+
+          <div id="actionButtons" class="hidden flex gap-3 pt-4">
+            <button type="button" id="btnCancelEdit"
+                    class="flex-1 border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-md font-medium transition-colors">
+              Hủy
+            </button>
+            <button type="submit" id="btnSaveProfile"
+                    class="flex-1 bg-[#EC3136] hover:bg-[#B8232A] text-white py-2 rounded-md font-medium transition-colors flex items-center justify-center">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+              </svg>
+              Lưu thay đổi
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+      <div class="flex flex-row items-center justify-between border-b border-gray-100 px-6 py-4">
+        <h2 class="text-lg font-bold text-gray-800">Đổi mật khẩu</h2>
+
+        <button id="btnOpenPasswordForm"
+                class="border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+          </svg>
+          Đổi mật khẩu
+        </button>
+      </div>
+
+      <div class="p-6">
+        <form id="changePasswordForm" class="space-y-4 hidden">
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Mật khẩu hiện tại</label>
+            <input type="password" id="currentPassword" placeholder="Nhập mật khẩu hiện tại"
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136]"/>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Mật khẩu mới</label>
+            <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới"
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136]"/>
+          </div>
+
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Xác nhận mật khẩu
+              mới</label>
+            <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới"
+                   class="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC3136]"/>
+          </div>
+
+          <div class="flex gap-3 pt-4">
+            <button type="button" id="btnCancelPassword"
+                    class="flex-1 border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-md font-medium transition-colors">
+              Hủy
+            </button>
+            <button type="submit"
+                    class="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-md font-medium transition-colors flex items-center justify-center">
+              Lưu mật khẩu mới
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="../../frontend/data/users.js"></script>
+<script src="../common/constants.js"></script>
+<script src="../common/toast.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/admin-profile.js"></script>
+</body>
+</html>
